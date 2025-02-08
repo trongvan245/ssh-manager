@@ -35,11 +35,10 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>SidebarHeader</SidebarHeader>
+      <SidebarHeader>SSH Manager</SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (

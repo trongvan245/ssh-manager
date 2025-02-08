@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Host } from "@/types";
+import { getFileName } from "@/utils/fileUtils";
+import { selectFile } from "@/utils/tauriFileDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -45,10 +47,23 @@ export default function ButtonAddHost({ addHost }: ButtonAddHostProps) {
     },
   });
 
+  const { setValue } = form;
+
   async function onSubmit(data: FormData) {
     addHost(data);
     form.reset();
   }
+
+  const handleSelectFile = async () => {
+    console.log("im clicked");
+    const filePath = await selectFile();
+    if (filePath) {
+      // Set the selected file path in the form field
+      setValue("identity_file", filePath);
+    } else {
+      console.log("No file selected");
+    }
+  };
 
   return (
     <Dialog>
@@ -122,11 +137,25 @@ export default function ButtonAddHost({ addHost }: ButtonAddHostProps) {
                 render={({ field }) => {
                   return (
                     <FormItem className="grid grid-cols-4 items-center gap-4">
-                      <FormLabel htmlFor="user" className="text-right">
+                      <FormLabel
+                        htmlFor="user"
+                        className="text-right flex-grow"
+                      >
                         SSH Key
                       </FormLabel>
-                      <FormControl>
-                        <Input className="col-span-3" {...field} />
+                      <FormControl className="col-span-3">
+                        <div className="w-full flex items-center justify-between space-x-2">
+                          <Input
+                            type="text"
+                            value={getFileName(field.value)} // Display the file name}
+                            readOnly
+                            placeholder="Select a file"
+                            className="flex-1 pointer-events-none" // Allow input to take most of the space
+                          />
+                          <Button onClick={handleSelectFile} className="ml-2">
+                            Browse
+                          </Button>
+                        </div>
                       </FormControl>
                     </FormItem>
                   );

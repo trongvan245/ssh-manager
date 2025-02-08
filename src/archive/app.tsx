@@ -31,7 +31,6 @@ function App() {
     initialItems
   );
 
-  console.log(items);
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
