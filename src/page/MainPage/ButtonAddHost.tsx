@@ -152,7 +152,11 @@ export default function ButtonAddHost({ addHost }: ButtonAddHostProps) {
                             placeholder="Select a file"
                             className="flex-1 pointer-events-none" // Allow input to take most of the space
                           />
-                          <Button onClick={handleSelectFile} className="ml-2">
+                          <Button
+                            onClick={handleSelectFile}
+                            className="ml-2"
+                            type="button"
+                          >
                             Browse
                           </Button>
                         </div>

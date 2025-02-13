@@ -18,6 +18,7 @@ export default function MainPage() {
           path: dirPath + "/config",
         });
         setHosts(hosts);
+        console.log("only once");
       } catch (error) {
         console.error("Failed to read SSH config:", error);
       }
@@ -34,23 +35,23 @@ export default function MainPage() {
       const dirPath = await getDirPath();
       await invoke("write_ssh_config", {
         hosts: newHosts,
-        path: dirPath + "/configtest",
+        path: dirPath + "/",
       });
     } catch (error) {
       console.error("Failed to write SSH config:", error);
     }
   };
 
-  const deleteHost = async (index: number) => {
-    const newHosts = [...hosts];
-    newHosts.splice(index, 1);
+  const deleteHost = async (host?: string) => {
+    const newHosts = hosts.filter((h) => h.host !== host);
     setHosts(newHosts);
+    console.log("delete host", newHosts, host);
 
     try {
       const dirPath = await getDirPath();
       await invoke("write_ssh_config", {
         hosts: newHosts,
-        path: dirPath + "/configtest",
+        path: dirPath + "/config",
       });
     } catch (error) {
       console.error("Failed to write SSH config:", error);
@@ -61,12 +62,11 @@ export default function MainPage() {
     const newHosts = [...hosts];
     newHosts[index] = updatedHost;
     setHosts(newHosts);
-
     try {
       const dirPath = await getDirPath();
       await invoke("write_ssh_config", {
         hosts: newHosts,
-        path: dirPath + "/configtest",
+        path: dirPath + "/config",
       });
     } catch (error) {
       console.error("Failed to write SSH config:", error);
@@ -89,7 +89,7 @@ export default function MainPage() {
             user={host.user}
             terminal={terminal}
             updateHost={(updatedHost) => updateHost(index, updatedHost)}
-            deleteHost={() => deleteHost(index)}
+            deleteHost={() => deleteHost(host.host)}
             identity_file={host.identity_file}
           />
         ))}

@@ -241,6 +241,7 @@ export function SSHCard({
                               <Button
                                 onClick={handleSelectFile}
                                 className="ml-2"
+                                type="button"
                               >
                                 Browse
                               </Button>
