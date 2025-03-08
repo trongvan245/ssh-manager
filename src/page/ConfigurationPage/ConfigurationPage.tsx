@@ -49,7 +49,6 @@ export default function ConfigurationPage() {
         )
         .map((entry) => entry.name);
       setSSHKeys(sshKeys);
-      console.log(sshKeys);
     };
     fetchSSHKeys();
   }, [dirPath]); //TODO: Trigger when new keys is added

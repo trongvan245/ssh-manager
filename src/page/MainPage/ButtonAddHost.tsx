@@ -21,6 +21,7 @@ import { Host } from "@/types";
 import { getFileName } from "@/utils/fileUtils";
 import { selectFile } from "@/utils/tauriFileDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CirclePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -55,7 +56,6 @@ export default function ButtonAddHost({ addHost }: ButtonAddHostProps) {
   }
 
   const handleSelectFile = async () => {
-    console.log("im clicked");
     const filePath = await selectFile();
     if (filePath) {
       // Set the selected file path in the form field
@@ -68,7 +68,9 @@ export default function ButtonAddHost({ addHost }: ButtonAddHostProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Add host</Button>
+        <CirclePlus />
+        {/* <div>Add host</div> */}
+        {/* <Button>Add host</Button> */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

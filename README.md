@@ -17,7 +17,11 @@ Tauri Desktop aplication to manage SSH config files
 - Icon-like cards of SSH connections define in .ssh/config
 - Cross-platform: Windows, Linux, Mac
 
-## Run the application
+## Install apps:
+
+https://github.com/trongvan245/ssh-manager/releases/tag/app-v0.1.0
+
+## Run the application - Development
 
 ### Prerequisites
 

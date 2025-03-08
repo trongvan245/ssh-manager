@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const path = await appDataDir();
-      console.log(path);
     };
     fetchData();
   }, []);
