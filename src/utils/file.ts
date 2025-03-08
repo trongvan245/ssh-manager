@@ -2,6 +2,7 @@ import { BaseDirectory, readFile, writeFile } from "@tauri-apps/plugin-fs";
 
 export const getAvatar = async (host: string): Promise<File | null> => {
   const filePath = `${host}.png`; // Avatar filename
+  console.log("Avatar file path:", filePath);
   try {
     // Read the binary file from AppData
     const fileData = await readFile(filePath, {
@@ -10,12 +11,14 @@ export const getAvatar = async (host: string): Promise<File | null> => {
 
     // Convert Uint8Array to Blob
     const blob = new Blob([fileData], { type: "image/png" });
+    console.log("Avatar blob:", blob);
 
     // Convert Blob to File
     const file = new File([blob], `${host}.png`, { type: "image/png" });
 
     return file;
   } catch (error) {
+    console.error("Failed to read avatar file:", error);
     return null; // Return null if file not found or an error occurs
   }
 };
